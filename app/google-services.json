@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "322096062501",
+    "project_id": "eatit-cd9f1",
+    "storage_bucket": "eatit-cd9f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322096062501:android:7fb492f310a7ef4d881fcc",
+        "android_client_info": {
+          "package_name": "com.example.kotlineatitv2client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322096062501-v3og0i4ve09poafasbi0hmmkjlj9asbl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kotlineatitv2client",
+            "certificate_hash": "53b830eacd01b3caa1c7af3d18647cd81c4ea3ce"
+          }
+        },
+        {
+          "client_id": "322096062501-meli9to87suuml6ul9bj6g6jeq66k53g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQR17U03V1yTVR4aSYdth6QDTI4p1xzQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322096062501-meli9to87suuml6ul9bj6g6jeq66k53g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
