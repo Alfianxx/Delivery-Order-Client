@@ -67,21 +67,23 @@ import kotlin.collections.HashMap
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var cartDataSource : CartDataSource
-    private lateinit var navController : NavController
-    private var drawer: DrawerLayout?=null
-    private var dialog: AlertDialog?=null
-    private var navView:NavigationView?=null
+    private lateinit var cartDataSource: CartDataSource
+    private lateinit var navController: NavController
+    private var drawer: DrawerLayout? = null
+    private var dialog: AlertDialog? = null
+    private var navView: NavigationView? = null
 
-    private var placeSelected: Place?=null
-    private var places_fragment:AutocompleteSupportFragment?=null
+    private var placeSelected: Place? = null
+    private var places_fragment: AutocompleteSupportFragment? = null
     private lateinit var placeClient: PlacesClient
-    private var placeFields = Arrays.asList(Place.Field.ID,
+    private var placeFields = Arrays.asList(
+        Place.Field.ID,
         Place.Field.NAME,
         Place.Field.ADDRESS,
-        Place.Field.LAT_LNG)
+        Place.Field.LAT_LNG
+    )
 
-    private var cloudsFunction: ICloudFunctions?=null
+    private var cloudsFunction: ICloudFunctions? = null
     private val compositeDisaple = CompositeDisposable()
 
     private var menuItemClick = -1
@@ -106,9 +108,9 @@ class HomeActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             navController.navigate(R.id.nav_cart)
         }
-        
+
         fab_chat.setOnClickListener {
-            startActivity(Intent(this,ChatActivity::class.java))
+            startActivity(Intent(this, ChatActivity::class.java))
         }
 
         drawer = findViewById(R.id.drawer_layout)
@@ -117,11 +119,11 @@ class HomeActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-                setOf(
-                        R.id.nav_restaurant,
-                        R.id.nav_home, R.id.nav_menu, R.id.nav_food_detail,
-                        R.id.nav_cart
-                ), drawer
+            setOf(
+                R.id.nav_restaurant,
+                R.id.nav_menu, R.id.nav_food_detail,
+                R.id.nav_cart
+            ), drawer
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView!!.setupWithNavController(navController)
@@ -130,54 +132,37 @@ class HomeActivity : AppCompatActivity() {
         var txt_user = headerView.findViewById<TextView>(R.id.txt_user)
         Common.setSpanString("Hello, ", Common.currentUser!!.name, txt_user)
 
-        navView!!.setNavigationItemSelectedListener(object:NavigationView.OnNavigationItemSelectedListener {
+        navView!!.setNavigationItemSelectedListener(object :
+            NavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
 
                 p0.isChecked = true
                 drawer!!.closeDrawers()
-                if (p0.itemId == R.id.nav_sign_out)
-                {
+                if (p0.itemId == R.id.nav_sign_out) {
                     signOut()
-                }
-                else if (p0.itemId == R.id.nav_restaurant)
-                {
-                    if(menuItemClick != p0.itemId)
+                } else if (p0.itemId == R.id.nav_restaurant) {
+                    if (menuItemClick != p0.itemId)
                         navController.navigate(R.id.nav_restaurant)
-                }
-                else if (p0.itemId == R.id.nav_home)
-                {
-                    if(menuItemClick != p0.itemId)
-                    {
+                }else if (p0.itemId == R.id.nav_cart) {
+                    if (menuItemClick != p0.itemId) {
                         EventBus.getDefault().postSticky(MenuInflateEvent(true))
-                        navController.navigate(R.id.nav_home)
+                        navController.navigate(R.id.nav_cart)
                     }
-                }
-                else if (p0.itemId == R.id.nav_cart)
-                {
-                    if(menuItemClick != p0.itemId){
+                } else if (p0.itemId == R.id.nav_menu) {
+                    if (menuItemClick != p0.itemId) {
                         EventBus.getDefault().postSticky(MenuInflateEvent(true))
-                        navController.navigate(R.id.nav_cart)}
-                }
-                else if (p0.itemId == R.id.nav_menu)
-                {
-                    if(menuItemClick != p0.itemId){
+                        navController.navigate(R.id.nav_menu)
+                    }
+                } else if (p0.itemId == R.id.nav_view_order) {
+                    if (menuItemClick != p0.itemId) {
                         EventBus.getDefault().postSticky(MenuInflateEvent(true))
-                        navController.navigate(R.id.nav_menu)}
-                }
-                else if (p0.itemId == R.id.nav_view_order)
-                {
-                    if(menuItemClick != p0.itemId){
-                        EventBus.getDefault().postSticky(MenuInflateEvent(true))
-                        navController.navigate(R.id.nav_view_order)}
-                }
-                else if (p0.itemId == R.id.nav_update_info)
-                {
+                        navController.navigate(R.id.nav_view_order)
+                    }
+                } else if (p0.itemId == R.id.nav_update_info) {
 
                     showUpdateInfoDialog()
 
-                }
-                else if (p0.itemId == R.id.nav_news)
-                {
+                } else if (p0.itemId == R.id.nav_news) {
 
                     showNewsDialog()
 
@@ -204,30 +189,27 @@ class HomeActivity : AppCompatActivity() {
         val itemView = LayoutInflater.from(this@HomeActivity)
             .inflate(R.layout.layout_subscribe_news, null)
         val ckb_news = itemView.findViewById<View>(R.id.ckb_subscribe_news) as CheckBox
-        val isSubscribeNews = Paper.book().read<Boolean>(Common.currentRestaurant!!.uid,false)
-        if (isSubscribeNews) ckb_news.isChecked=true
-        builder.setNegativeButton("CANCEL", {dialogInterface, i -> dialogInterface.dismiss() })
-        builder.setPositiveButton("SEND", {dialogInterface, i ->
-            if (ckb_news.isChecked)
-            {
-                Paper.book().write(Common.currentRestaurant!!.uid,true)
+        val isSubscribeNews = Paper.book().read<Boolean>(Common.currentRestaurant!!.uid, false)
+        if (isSubscribeNews) ckb_news.isChecked = true
+        builder.setNegativeButton("CANCEL", { dialogInterface, i -> dialogInterface.dismiss() })
+        builder.setPositiveButton("SEND", { dialogInterface, i ->
+            if (ckb_news.isChecked) {
+                Paper.book().write(Common.currentRestaurant!!.uid, true)
                 FirebaseMessaging.getInstance().subscribeToTopic(Common.getNewsTopic())
-                    .addOnFailureListener { e:Exception -> 
-                        Toast.makeText(this,e.message,Toast.LENGTH_SHORT).show()
+                    .addOnFailureListener { e: Exception ->
+                        Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
                     }
-                    .addOnSuccessListener { aVoid:Void? ->
-                        Toast.makeText(this,"Subscribe success!",Toast.LENGTH_SHORT).show()
+                    .addOnSuccessListener { aVoid: Void? ->
+                        Toast.makeText(this, "Subscribe success!", Toast.LENGTH_SHORT).show()
                     }
-            }
-            else
-            {
+            } else {
                 Paper.book().delete(Common.currentRestaurant!!.uid)
                 FirebaseMessaging.getInstance().unsubscribeFromTopic(Common.getNewsTopic())
-                    .addOnFailureListener { e:Exception ->
-                        Toast.makeText(this,e.message,Toast.LENGTH_SHORT).show()
+                    .addOnFailureListener { e: Exception ->
+                        Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
                     }
-                    .addOnSuccessListener { aVoid:Void? ->
-                        Toast.makeText(this,"Unsubscribe success!",Toast.LENGTH_SHORT).show()
+                    .addOnSuccessListener { aVoid: Void? ->
+                        Toast.makeText(this, "Unsubscribe success!", Toast.LENGTH_SHORT).show()
                     }
             }
         })
@@ -237,7 +219,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initPlacesClient() {
-        Places.initialize(this,getString(R.string.google_maps_key))
+        Places.initialize(this, getString(R.string.google_maps_key))
         placeClient = Places.createClient(this)
     }
 
@@ -256,14 +238,14 @@ class HomeActivity : AppCompatActivity() {
         places_fragment = supportFragmentManager.findFragmentById(R.id.places_autocomplete_fragment)
                 as AutocompleteSupportFragment
         places_fragment!!.setPlaceFields(placeFields)
-        places_fragment!!.setOnPlaceSelectedListener(object: PlaceSelectionListener {
+        places_fragment!!.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(p0: Place) {
                 placeSelected = p0
                 txt_address.text = placeSelected!!.address
             }
 
             override fun onError(p0: Status) {
-                Toast.makeText(this@HomeActivity,""+p0.statusMessage,Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@HomeActivity, "" + p0.statusMessage, Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -284,9 +266,9 @@ class HomeActivity : AppCompatActivity() {
                     return@setPositiveButton
                 }
 
-                val update_data = HashMap<String,Any>()
-                update_data.put("name",edt_name.text.toString())
-                update_data.put("address",txt_address.text.toString())
+                val update_data = HashMap<String, Any>()
+                update_data.put("name", edt_name.text.toString())
+                update_data.put("address", txt_address.text.toString())
                 update_data.put("lat", placeSelected!!.latLng!!.latitude)
                 update_data.put("lng", placeSelected!!.latLng!!.longitude)
 
@@ -295,7 +277,7 @@ class HomeActivity : AppCompatActivity() {
                     .child(Common.currentUser!!.uid!!)
                     .updateChildren(update_data)
                     .addOnFailureListener {
-                        Toast.makeText(this@HomeActivity,it.message,Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@HomeActivity, it.message, Toast.LENGTH_SHORT).show()
                     }
                     .addOnSuccessListener {
                         Common.currentUser!!.name = update_data["name"].toString()
@@ -303,12 +285,12 @@ class HomeActivity : AppCompatActivity() {
                         Common.currentUser!!.lat = update_data["lat"].toString().toDouble()
                         Common.currentUser!!.lng = update_data["lng"].toString().toDouble()
 
-                        Toast.makeText(this@HomeActivity,"Update Info Success",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@HomeActivity, "Update Info Success", Toast.LENGTH_SHORT)
+                            .show()
                     }
-            }
-            else
-            {
-                Toast.makeText(this@HomeActivity,"Please select address",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@HomeActivity, "Please select address", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -326,14 +308,14 @@ class HomeActivity : AppCompatActivity() {
         val builder = androidx.appcompat.app.AlertDialog.Builder(this)
         builder.setTitle("Sign out")
             .setMessage("Do you really want to exit?")
-            .setNegativeButton("CANCEL",{dialogInterface,_ -> dialogInterface.dismiss()})
-            .setPositiveButton("OK"){dialogInterface,_ ->
+            .setNegativeButton("CANCEL", { dialogInterface, _ -> dialogInterface.dismiss() })
+            .setPositiveButton("OK") { dialogInterface, _ ->
                 Common.foodSelected = null
                 Common.categorySelected = null
                 Common.currentUser = null
                 FirebaseAuth.getInstance().signOut()
 
-                val intent = Intent(this@HomeActivity,MainActivity::class.java)
+                val intent = Intent(this@HomeActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 finish()
@@ -366,57 +348,45 @@ class HomeActivity : AppCompatActivity() {
         super.onStop()
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    fun onCategorySelected(event:CategoryClick)
-    {
-        if (event.isSuccess)
-        {
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onCategorySelected(event: CategoryClick) {
+        if (event.isSuccess) {
             //Toast.makeText(this,"Click to"+event.category.name,Toast.LENGTH_SHORT).show()
             findNavController(R.id.nav_host_fragment).navigate(R.id.nav_food_list)
         }
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    fun onFoodSelected(event: FoodItemClick)
-    {
-        if (event.isSuccess)
-        {
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onFoodSelected(event: FoodItemClick) {
+        if (event.isSuccess) {
 
             findNavController(R.id.nav_host_fragment).navigate(R.id.nav_food_detail)
         }
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    fun onHideFABEvent(event: HideFABCart)
-    {
-        if (event.isHide)
-        {
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onHideFABEvent(event: HideFABCart) {
+        if (event.isHide) {
             fab.hide()
             fab_chat.hide()
-        }
-        else
-        {
+        } else {
             fab.show()
             fab_chat.show()
         }
 
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    fun onCountCartEvent(event: CountCartEvent)
-    {
-        if (event.isSuccess)
-        {
-            if (Common.currentRestaurant!=null)
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onCountCartEvent(event: CountCartEvent) {
+        if (event.isSuccess) {
+            if (Common.currentRestaurant != null)
                 countCartItem()
         }
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    fun onPopularFoodItemClick(event: PopularFoodItemClick)
-    {
-        if (event.popularCategoryModel != null)
-        {
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onPopularFoodItemClick(event: PopularFoodItemClick) {
+        if (event.popularCategoryModel != null) {
             dialog!!.show()
 
             FirebaseDatabase.getInstance()
@@ -424,15 +394,15 @@ class HomeActivity : AppCompatActivity() {
                 .child(Common.currentRestaurant!!.uid)
                 .child(Common.CATEGORY_REF)
                 .child(event.popularCategoryModel!!.menu_id!!)
-                .addListenerForSingleValueEvent(object:ValueEventListener{
+                .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         dialog!!.dismiss()
-                        Toast.makeText(this@HomeActivity,""+p0.message,Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@HomeActivity, "" + p0.message, Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
-                        if (p0.exists())
-                        {
+                        if (p0.exists()) {
                             Common.categorySelected = p0.getValue(CategoryModel::class.java)
                             Common.categorySelected!!.menu_id = p0.key
 
@@ -446,35 +416,42 @@ class HomeActivity : AppCompatActivity() {
                                 .orderByChild("id")
                                 .equalTo(event.popularCategoryModel.food_id)
                                 .limitToLast(1)
-                                .addListenerForSingleValueEvent(object:ValueEventListener{
+                                .addListenerForSingleValueEvent(object : ValueEventListener {
                                     override fun onCancelled(p0: DatabaseError) {
                                         dialog!!.dismiss()
-                                        Toast.makeText(this@HomeActivity,""+p0.message,Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            this@HomeActivity,
+                                            "" + p0.message,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
 
                                     override fun onDataChange(p0: DataSnapshot) {
-                                        if (p0.exists())
-                                        {
-                                            for(foodSnapshot in p0.children)
-                                            {
-                                                Common.foodSelected = foodSnapshot.getValue(FoodModel::class.java)
+                                        if (p0.exists()) {
+                                            for (foodSnapshot in p0.children) {
+                                                Common.foodSelected =
+                                                    foodSnapshot.getValue(FoodModel::class.java)
                                                 Common.foodSelected!!.key = foodSnapshot.key
                                             }
                                             navController!!.navigate(R.id.nav_food_detail)
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(this@HomeActivity,"Item doesn't exists",Toast.LENGTH_SHORT).show()
+                                        } else {
+                                            Toast.makeText(
+                                                this@HomeActivity,
+                                                "Item doesn't exists",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
                                         dialog!!.dismiss()
                                     }
 
                                 })
-                        }
-                        else
-                        {
+                        } else {
                             dialog!!.dismiss()
-                            Toast.makeText(this@HomeActivity,"Item doesn't exists",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@HomeActivity,
+                                "Item doesn't exists",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
@@ -482,11 +459,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    fun onBestDealFoodItemClick(event: BestDealItemClick)
-    {
-        if (event.model != null)
-        {
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onBestDealFoodItemClick(event: BestDealItemClick) {
+        if (event.model != null) {
             dialog!!.show()
 
             FirebaseDatabase.getInstance()
@@ -494,15 +469,15 @@ class HomeActivity : AppCompatActivity() {
                 .child(Common.currentRestaurant!!.uid)
                 .child(Common.CATEGORY_REF)
                 .child(event.model!!.menu_id!!)
-                .addListenerForSingleValueEvent(object:ValueEventListener{
+                .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         dialog!!.dismiss()
-                        Toast.makeText(this@HomeActivity,""+p0.message,Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@HomeActivity, "" + p0.message, Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
-                        if (p0.exists())
-                        {
+                        if (p0.exists()) {
                             Common.categorySelected = p0.getValue(CategoryModel::class.java)
                             Common.categorySelected!!.menu_id = p0.key
 
@@ -516,35 +491,42 @@ class HomeActivity : AppCompatActivity() {
                                 .orderByChild("id")
                                 .equalTo(event.model.food_id)
                                 .limitToLast(1)
-                                .addListenerForSingleValueEvent(object:ValueEventListener{
+                                .addListenerForSingleValueEvent(object : ValueEventListener {
                                     override fun onCancelled(p0: DatabaseError) {
                                         dialog!!.dismiss()
-                                        Toast.makeText(this@HomeActivity,""+p0.message,Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            this@HomeActivity,
+                                            "" + p0.message,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
 
                                     override fun onDataChange(p0: DataSnapshot) {
-                                        if (p0.exists())
-                                        {
-                                            for(foodSnapshot in p0.children)
-                                            {
-                                                Common.foodSelected = foodSnapshot.getValue(FoodModel::class.java)
+                                        if (p0.exists()) {
+                                            for (foodSnapshot in p0.children) {
+                                                Common.foodSelected =
+                                                    foodSnapshot.getValue(FoodModel::class.java)
                                                 Common.foodSelected!!.key = foodSnapshot.key
                                             }
                                             navController!!.navigate(R.id.nav_food_detail)
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(this@HomeActivity,"Item doesn't exists",Toast.LENGTH_SHORT).show()
+                                        } else {
+                                            Toast.makeText(
+                                                this@HomeActivity,
+                                                "Item doesn't exists",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
                                         dialog!!.dismiss()
                                     }
 
                                 })
-                        }
-                        else
-                        {
+                        } else {
                             dialog!!.dismiss()
-                            Toast.makeText(this@HomeActivity,"Item doesn't exists",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@HomeActivity,
+                                "Item doesn't exists",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
@@ -553,16 +535,14 @@ class HomeActivity : AppCompatActivity() {
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public fun onMenuItemBack(event:MenuItemBack)
-    {
+    public fun onMenuItemBack(event: MenuItemBack) {
         menuItemClick = -1
-        if(supportFragmentManager.backStackEntryCount > 0)
+        if (supportFragmentManager.backStackEntryCount > 0)
             supportFragmentManager.popBackStack();
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public fun onRestaurantClick(event:MenuItemEvent)
-    {
+    public fun onRestaurantClick(event: MenuItemEvent) {
 
         cloudsFunction = RetrofitCloudClient.getInstance(event.restaurantModel.paymentUrl)
             .create(ICloudFunctions::class.java)
@@ -593,8 +573,8 @@ class HomeActivity : AppCompatActivity() {
 //                        }));
 
         val bundle = Bundle()
-        bundle.putString("restaurant",event.restaurantModel.uid)
-        navController.navigate(R.id.nav_home,bundle)
+        bundle.putString("restaurant", event.restaurantModel.uid)
+        navController.navigate(R.id.nav_menu, bundle)
 
         EventBus.getDefault().postSticky(MenuInflateEvent(true)) //Show detail menu
         EventBus.getDefault().postSticky(HideFABCart(false)) //Show Cart Button
@@ -604,8 +584,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public fun onInflateMenu(event:MenuInflateEvent)
-    {
+    public fun onInflateMenu(event: MenuInflateEvent) {
         navView!!.menu.clear()
 
         if (event.isShowDetail)
@@ -615,25 +594,29 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun countCartItem() {
-        cartDataSource.countItemInCart(Common.currentUser!!.uid!!,Common.currentRestaurant!!.uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object: SingleObserver<Int>{
-                    override fun onSuccess(t: Int) {
-                        fab.count = t
-                    }
+        cartDataSource.countItemInCart(Common.currentUser!!.uid!!, Common.currentRestaurant!!.uid)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : SingleObserver<Int> {
+                override fun onSuccess(t: Int) {
+                    fab.count = t
+                }
 
-                    override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-                    }
+                }
 
-                    override fun onError(e: Throwable) {
-                        if (!e.message!!.contains("Query returned empty"))
-                            Toast.makeText(this@HomeActivity,"[COUNT CART]"+e.message,Toast.LENGTH_SHORT).show()
-                        else
-                            fab.count = 0
-                    }
-                    
-                })
+                override fun onError(e: Throwable) {
+                    if (!e.message!!.contains("Query returned empty"))
+                        Toast.makeText(
+                            this@HomeActivity,
+                            "[COUNT CART]" + e.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    else
+                        fab.count = 0
+                }
+
+            })
     }
 }

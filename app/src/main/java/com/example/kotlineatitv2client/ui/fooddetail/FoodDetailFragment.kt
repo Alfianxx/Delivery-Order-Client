@@ -3,6 +3,7 @@ package com.example.kotlineatitv2client.ui.fooddetail
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,11 +81,11 @@ class FoodDetailFragment : Fragment(), TextWatcher {
         val root = inflater.inflate(R.layout.fragment_food_detail, container, false)
         initViews(root)
 
-        foodDetailViewModel.getMutableLiveDataFood().observe(this, Observer {
+        foodDetailViewModel.getMutableLiveDataFood().observe(viewLifecycleOwner, Observer {
             displayInfo(it)
         })
 
-        foodDetailViewModel.getMutableLiveDataComment().observe(this, Observer {
+        foodDetailViewModel.getMutableLiveDataComment().observe(viewLifecycleOwner, Observer {
             submitRatingToFirebase(it)
         })
         return root
@@ -161,7 +162,7 @@ class FoodDetailFragment : Fragment(), TextWatcher {
     }
 
     private fun displayInfo(it: FoodModel?) {
-        Glide.with(context!!).load(it!!.image).into(img_food!!)
+        Glide.with(requireContext()).load(it!!.image).into(img_food!!)
         food_name!!.text = StringBuilder(it!!.name!!)
         food_description!!.text = StringBuilder(it!!.description!!)
         food_price!!.text = StringBuilder(it!!.price!!.toString())
@@ -217,9 +218,9 @@ class FoodDetailFragment : Fragment(), TextWatcher {
 
         (activity as AppCompatActivity).supportActionBar!!.setTitle(Common.foodSelected!!.name)
 
-        cartDataSource = LocalCartDataSource(CartDatabase.getInstance(context!!).cartDAO())
+        cartDataSource = LocalCartDataSource(CartDatabase.getInstance(requireContext()).cartDAO())
 
-        addonBottomSheetDialog = BottomSheetDialog(context!!,R.style.DialogStyle)
+        addonBottomSheetDialog = BottomSheetDialog(requireContext(),R.style.DialogStyle)
         val layout_user_selected_addon = layoutInflater.inflate(R.layout.layout_addon_display, null)
         chip_group_addon = layout_user_selected_addon.findViewById(R.id.chip_group_addon) as ChipGroup
         edt_search_addon = layout_user_selected_addon.findViewById(R.id.edt_search) as EditText
@@ -230,7 +231,7 @@ class FoodDetailFragment : Fragment(), TextWatcher {
             calculateTotalPrice()
         }
 
-        waitingDialog = SpotsDialog.Builder().setContext(context!!).setCancelable(false).build()
+        waitingDialog = SpotsDialog.Builder().setContext(requireContext()).setCancelable(false).build()
 
         btnCart = root!!.findViewById(R.id.btnCart) as CounterFab
         img_food = root!!.findViewById(R.id.img_food) as ImageView
@@ -259,7 +260,7 @@ class FoodDetailFragment : Fragment(), TextWatcher {
         }
         btnShowComment!!.setOnClickListener{
             val commentFragment = CommentFragment.getInstance()
-            commentFragment.show(activity!!.supportFragmentManager,"CommentFragment")
+            commentFragment.show(requireActivity().supportFragmentManager,"CommentFragment")
         }
 
         btnCart!!.setOnClickListener {
@@ -269,6 +270,7 @@ class FoodDetailFragment : Fragment(), TextWatcher {
             cartItem.userPhone = Common.currentUser!!.phone
 
             cartItem.categoryId = Common.categorySelected!!.menu_id!!
+
             cartItem.foodId = Common.foodSelected!!.id!!
             cartItem.foodName = Common.foodSelected!!.name!!
             cartItem.foodImage = Common.foodSelected!!.image!!
@@ -411,7 +413,7 @@ class FoodDetailFragment : Fragment(), TextWatcher {
 
 
     private fun showDialogRating() {
-        var builder = AlertDialog.Builder(context!!)
+        var builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Rating Food")
         builder.setMessage("Please Fill Information")
 

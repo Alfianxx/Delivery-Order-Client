@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:id="@+id/home_group">
+    <group android:id="@+id/category_group">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_menu"
+            android:icon="@drawable/ic_restaurant_menu_black_24dp"
+            android:title="@string/menu_category" />
     </group>
 
     <group android:id="@+id/news_group">
@@ -15,13 +15,6 @@
             android:id="@+id/nav_news"
             android:icon="@drawable/ic_baseline_markunread_24"
             android:title="@string/menu_news" />
-    </group>
-
-    <group android:id="@+id/category_group">
-        <item
-            android:id="@+id/nav_menu"
-            android:icon="@drawable/ic_restaurant_menu_black_24dp"
-            android:title="@string/menu_category" />
     </group>
 
     <group android:id="@+id/cart_group">
@@ -37,7 +30,5 @@
             android:icon="@drawable/ic_view_headline_black_24dp"
             android:title="@string/menu_view_orders" />
     </group>
-
-
 
 </menu>

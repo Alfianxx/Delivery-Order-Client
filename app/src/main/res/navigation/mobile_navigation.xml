@@ -13,19 +13,7 @@
 
         <action
             android:id="@+id/action_nav_restaurant_to_nav_home"
-            app:destination="@+id/nav_home"/>
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.kotlineatitv2client.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
-
-        <argument android:name="restaurant"
-            app:argType="string"
-            android:defaultValue="empty"/>
+            app:destination="@+id/nav_menu"/>
 
     </fragment>
 
@@ -33,7 +21,13 @@
         android:id="@+id/nav_menu"
         android:name="com.example.kotlineatitv2client.ui.menu.MenuFragment"
         android:label="@string/menu_category"
-        tools:layout="@layout/fragment_category" />
+        tools:layout="@layout/fragment_category" >
+
+        <argument android:name="restaurant"
+            app:argType="string"
+            android:defaultValue="empty"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_food_detail"

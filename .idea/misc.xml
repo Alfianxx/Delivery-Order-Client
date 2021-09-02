@@ -10,10 +10,17 @@
       <map>
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/activity_home.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/app_bar_home.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/content_home.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_home.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_restaurant.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_popular_categories_item.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_restaurant.xml" value="0.33" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/activity_home_drawer.xml" value="0.18645833333333334" />
-        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/restaurant_detail_menu.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/cart_menu.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/home.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/restaurant_detail_menu.xml" value="0.33" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/search_menu.xml" value="0.18645833333333334" />
       </map>
     </option>
   </component>

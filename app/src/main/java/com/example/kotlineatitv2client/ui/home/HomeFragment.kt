@@ -46,18 +46,18 @@ class HomeFragment : Fragment() {
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val key = arguments!!.getString("restaurant")
+        val key = requireArguments().getString("restaurant")
 
         initView(root)
         //Bind Data
-        homeViewModel.getPopularList(key!!).observe(this, Observer {
+        homeViewModel.getPopularList(key!!).observe(viewLifecycleOwner, Observer {
             val listData = it
-            val adapter = MyPopularCategoriesAdapter(context!!,listData)
+            val adapter = MyPopularCategoriesAdapter(requireContext(),listData)
             recyclerView!!.adapter = adapter
             recyclerView!!.layoutAnimation = layoutAnimationController
         })
-        homeViewModel.getBestDealList(key!!).observe(this, Observer {
-            val adapter = MyBestDealsAdapter(context!!,it,false)
+        homeViewModel.getBestDealList(key!!).observe(viewLifecycleOwner, Observer {
+            val adapter = MyBestDealsAdapter(requireContext(),it,false)
             viewPager!!.adapter = adapter
         })
         return root
