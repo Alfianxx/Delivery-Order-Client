@@ -48,10 +48,10 @@ class FoodListFragment : Fragment() {
             ViewModelProviders.of(this).get(FoodListViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_food_list, container, false)
         initViews(root)
-        foodListViewModel.getMutableFoodModelListData().observe(this, Observer {
+        foodListViewModel.getMutableFoodModelListData().observe(viewLifecycleOwner, Observer {
             if (it != null) //fix crash when category is empty fooda
             {
-                adapter = MyFoodListAdapter(context!!,it)
+                adapter = MyFoodListAdapter(requireContext(),it)
                 recycler_food_list!!.adapter = adapter
                 recycler_food_list!!.layoutAnimation = layoutAnimationController
             }
@@ -79,9 +79,9 @@ class FoodListFragment : Fragment() {
 
         val menuItem = menu.findItem(R.id.action_search)
 
-        val searchManager = activity!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menuItem.actionView as androidx.appcompat.widget.SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
 
         //Event
         searchView.setOnQueryTextListener(object:androidx.appcompat.widget.SearchView.OnQueryTextListener{

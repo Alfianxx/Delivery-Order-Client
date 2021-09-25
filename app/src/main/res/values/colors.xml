@@ -9,4 +9,6 @@
     <color name="background_color">#F5f5f5</color>
     <color name="dialog_header_color">#C5C5C5</color>
     <color name="dialog_text_color">#464646</color>
+    <color name="black">#000000</color>
+
 </resources>

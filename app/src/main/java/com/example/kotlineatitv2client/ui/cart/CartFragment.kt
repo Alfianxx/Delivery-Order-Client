@@ -340,7 +340,7 @@ class CartFragment : Fragment(), ILoadTimeFromFirebaseCallback, ISearchCategoryC
         txt_total_price = root.findViewById(R.id.txt_total_price) as TextView
         group_place_holder = root.findViewById(R.id.group_place_holder) as CardView
 
-        btn_place_order = root.findViewById(R.id.btn_place_order) as Button
+        btn_place_order = root.findViewById(R.id.btn_place_order) as Button //TODO ganti tempat panggil button
 
         //Event
         btn_place_order.setOnClickListener {
@@ -776,8 +776,10 @@ class CartFragment : Fragment(), ILoadTimeFromFirebaseCallback, ISearchCategoryC
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object:SingleObserver<Double>{
                 override fun onSuccess(price: Double) {
-                    txt_total_price!!.text = StringBuilder("Total: $")
+                    txt_total_price!!.text = StringBuilder("Total: Rp.")
                         .append(Common.formatPrice(price))
+                    Log.d("aan", "onSuccess: harga = $price")
+
                 }
 
                 override fun onSubscribe(d: Disposable) {

@@ -8,14 +8,44 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/activity_chat.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/activity_home.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/activity_tracking_order.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/app_bar_home.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/bottom_sheet_comment_fragment.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/content_home.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_cart.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_category.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_food_detail.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_food_list.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_home.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_restaurant.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_share.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/fragment_view_orders.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_addon_display.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_best_deals_item.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_cart_item.xml" value="0.33" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_category_item.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_chip.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_chip_with_delete.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_comment_item.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_dialog_order_detail.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_dialog_update_cart.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_food_item.xml" value="0.25" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_marker_display.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_message_picture.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_message_text.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_order_detail_item.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_order_item.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_place_order.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_popular_categories_item.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_rating_comment.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_refund_request.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_register.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_restaurant.xml" value="0.33" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/layout_subscribe_news.xml" value="0.18645833333333334" />
+        <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/layout/nav_header_home.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/activity_home_drawer.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/cart_menu.xml" value="0.18645833333333334" />
         <entry key="..\:/Coding/AndroidStudio/Skripsi/KotlinEatItV2Client/app/src/main/res/menu/home.xml" value="0.18645833333333334" />

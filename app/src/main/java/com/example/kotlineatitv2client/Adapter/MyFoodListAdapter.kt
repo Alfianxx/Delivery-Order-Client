@@ -1,12 +1,16 @@
 package com.example.kotlineatitv2client.Adapter
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlineatitv2client.Callback.IRecyclerItemClickListener
@@ -53,7 +57,8 @@ class MyFoodListAdapter (internal var context: Context,
 
         })
 
-        holder.img_cart!!.setOnClickListener {
+        holder.btn_checkout?.setOnClickListener {
+
             val cartItem = CartItem()
             cartItem.restaurantId = Common.currentRestaurant!!.uid
             cartItem.uid = Common.currentUser!!.uid
@@ -145,6 +150,12 @@ class MyFoodListAdapter (internal var context: Context,
                         }
 
                     })
+
+            // TODO FIX : pindah ke cart dengan delay
+            Handler(Looper.getMainLooper()).postDelayed({
+                holder.itemView.findNavController().navigate(R.id.nav_cart)
+            }, 100)
+
         }
     }
 
@@ -174,8 +185,7 @@ class MyFoodListAdapter (internal var context: Context,
         var txt_food_price: TextView?=null
 
         var img_food_image: ImageView?=null
-        var img_fav: ImageView?=null
-        var img_cart: ImageView?=null
+        var btn_checkout: Button?=null
 
         internal var listener: IRecyclerItemClickListener?=null
 
@@ -188,8 +198,8 @@ class MyFoodListAdapter (internal var context: Context,
             txt_food_name = itemView.findViewById(R.id.txt_food_name) as TextView
             txt_food_price = itemView.findViewById(R.id.txt_food_price) as TextView
             img_food_image = itemView.findViewById(R.id.img_food_image) as ImageView
-            img_cart = itemView.findViewById(R.id.img_quick_cart) as ImageView
-            img_fav = itemView.findViewById(R.id.img_fav) as ImageView
+            btn_checkout = itemView.findViewById(R.id.btn_checkout) as Button
+
 
             itemView.setOnClickListener(this)
         }

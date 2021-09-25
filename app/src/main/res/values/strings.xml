@@ -13,12 +13,12 @@
     <string name="menu_view_orders">View Orders</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_food_detail">Food Detail</string>
-    <string name="menu_cart">Cart</string>
+    <string name="menu_cart">Checkout</string>
     <string name="menu_share">Share</string>
     <string name="menu_food_list">Food List</string>
     <string name="popular_categories">Popular Categories</string>
     <string name="best_deals">Best Deals</string>
-    <string name="menu_category">Categories</string>
+    <string name="menu_category">Daftar Produk</string>
     <string name="size">Size</string>
     <string name="add_on">Addon</string>
     <string name="action_settings">Settings</string>
@@ -33,5 +33,6 @@
     <string name="title_activity_tracking_order">Map</string>
     <string name="menu_news">News</string>
     <string name="menu_restaurant">Restaurant</string>
+    <string name="checkout">Checkout</string>
 
 </resources>

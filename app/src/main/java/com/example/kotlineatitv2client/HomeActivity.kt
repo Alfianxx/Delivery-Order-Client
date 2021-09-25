@@ -588,9 +588,9 @@ class HomeActivity : AppCompatActivity() {
         navView!!.menu.clear()
 
         if (event.isShowDetail)
-            navView!!.inflateMenu(R.menu.restaurant_detail_menu)
+            navView!!.inflateMenu(R.menu.restaurant_detail_menu)    // Navigation drawer jika membuka toko
         else
-            navView!!.inflateMenu(R.menu.activity_home_drawer)
+            navView!!.inflateMenu(R.menu.activity_home_drawer)      // Navigation drawer sebelum membuka toko
     }
 
     private fun countCartItem() {

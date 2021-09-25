@@ -1,6 +1,8 @@
 package com.example.kotlineatitv2client.ui.fooddetail
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -14,6 +16,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.andremion.counterfab.CounterFab
 import com.bumptech.glide.Glide
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
@@ -43,6 +47,10 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_food_detail.*
 import org.greenrobot.eventbus.EventBus
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.concurrent.schedule
 
 class FoodDetailFragment : Fragment(), TextWatcher {
 
@@ -363,6 +371,13 @@ class FoodDetailFragment : Fragment(), TextWatcher {
                         }
 
                     })
+
+            // TODO FIX : pindah ke cart dengan delay
+            Handler(Looper.getMainLooper()).postDelayed({
+                view?.findNavController()?.navigate(R.id.nav_cart)
+            }, 100)
+
+
         }
     }
 

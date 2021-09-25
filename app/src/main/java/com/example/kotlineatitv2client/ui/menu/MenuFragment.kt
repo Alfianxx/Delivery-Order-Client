@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlineatitv2client.Adapter.MyBestDealsAdapter
 import com.example.kotlineatitv2client.Adapter.MyCategoriesAdapter
@@ -45,13 +46,13 @@ class MenuFragment : Fragment() {
 
         initView(root)
 
-        menuViewModel.getMessageError().observe(this, Observer {
+        menuViewModel.getMessageError().observe(viewLifecycleOwner, Observer {
             Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
         })
 
-        menuViewModel.getCategoryList().observe(this, Observer {
+        menuViewModel.getCategoryList().observe(viewLifecycleOwner, Observer {
             dialog.dismiss()
-            adapter = MyCategoriesAdapter(context!!, it)
+            adapter = MyCategoriesAdapter(requireContext(), it)
             recycler_menu!!.adapter =  adapter
             recycler_menu!!.layoutAnimation = layoutAnimationController
         })
@@ -68,23 +69,8 @@ class MenuFragment : Fragment() {
 
         recycler_menu = root.findViewById(R.id.recycler_menu) as RecyclerView
         recycler_menu!!.setHasFixedSize(true)
-        val layoutManager = GridLayoutManager(context,2)
-        layoutManager.orientation = RecyclerView.VERTICAL
-        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
-            override fun getSpanSize(position: Int): Int {
-                return if(adapter != null)
-                {
-                    when(adapter!!.getItemViewType(position)){
-                        Common.DEFAULT_COLUMN_COUNT -> 1
-                        Common.FULL_WIDTH_COLUMN -> 2
-                        else -> -1
-                    }
-                }else
-                    -1
-            }
 
-        }
-        recycler_menu!!.layoutManager = layoutManager
+        recycler_menu!!.layoutManager = LinearLayoutManager(requireContext())
         recycler_menu!!.addItemDecoration(SpacesItemDecoration(8))
     }
 
@@ -93,9 +79,9 @@ class MenuFragment : Fragment() {
 
         val menuItem = menu.findItem(R.id.action_search)
 
-        val searchManager = activity!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menuItem.actionView as androidx.appcompat.widget.SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
 
         //Event
         searchView.setOnQueryTextListener(object:androidx.appcompat.widget.SearchView.OnQueryTextListener{
